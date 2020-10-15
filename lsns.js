@@ -89,7 +89,7 @@ function mkProfile(img, n, f, items) {
   return addSec('#f5f5f5', [concat('<div class="profile"/>', [title, text])]);
 }
 function mkItm(n, items) {
-  var title = '<a class="anchor" href="#' + idFromStr(n) + '"><h4 id="' + idFromStr(n) + '">' + n + '</h4></a>',
+  var title = '<a href="#' + idFromStr(n) + '"><h4 id="' + idFromStr(n) + '">' + n + '</h4></a>',
       text = concat('<div style=""/>', items);
   return addSec('#f5f5f5', [concat('<div class="profile"/>', [title, text])]);
 }
@@ -101,6 +101,7 @@ function addSec(bc, its, c="section") {
 
 function idFromStr(str) {
   return str
+    .normalize('NFC')
     .replace(/[ÀÁÂÃÄÅ]/g,"A")
     .replace(/[àáâãäå]/g,"a")
     .replace(/[Č]/g,"C")
