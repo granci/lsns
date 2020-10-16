@@ -33,7 +33,6 @@ $(document).ready(function() {
   });
 
   $('.nav-item').on('click',function(){
-    console.log('daco');
     $('.nav-item').removeClass('active');
     $(this).addClass('active');
   });  
@@ -104,6 +103,29 @@ function mkTit(t) { return '<h2>'+t+'</h2>'; }
 function mkP(t) { return '<p>'+linkify(t)+'</p>'; }
 function addSec(bc, its, c="section") {
   concat('<div class="'+c+'" style="background-color: '+bc+'"/>', its).appendTo($('#body'));
+}
+
+function mkNav(fbLink) {
+  var menuItems = {
+    index: 'Násilníci',
+    fasisti: 'Fašisti',
+    seky: 'Šeky',
+    hlupaci: 'Hlupáci',
+    weby: 'Kotleboweby',
+  }
+  var file = document.URL.split('.html')[0].split('/')[document.URL.split('.html')[0].split('/').length - 1];
+  var ul = $('<ul/>');
+  Object.keys(menuItems).forEach(k => {
+    var cl = 'nav-item';
+    if (file === k) cl += ' active';
+    $('<li class="' + cl + '"><a href="' + k + '.html">' + menuItems[k] + '</a></li>').appendTo(ul);
+  });
+  if (fbLink) {
+    var fbBtn = $('<div class="fb-share-button" data-href="'+ fbLink + '" data-layout="button_count" data-size="small"/>')
+    $('<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=' + fbLink + '&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">').appendTo(fbBtn);
+    fbBtn.appendTo(ul);
+  }
+  ul.appendTo($('#nav'));
 }
 
 function idFromStr(str) {
